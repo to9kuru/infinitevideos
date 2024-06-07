@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>infinite video</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="floating">Infinite video</h1>
+        <video id="videoPlayer" controls autoplay loop class="video-player floating" style="display: none;">
+            <source id="videoSource">
+            お使いのブラウザは動画タグをサポートしていません。出直せ🖕
+        </video>
+        <label for="videoFile" class="file-label floating">
+            Upload
+        </label>
+        <input type="file" id="videoFile" accept="video/*">
+    </div>
+
+    <script>
+        document.getElementById('videoFile').addEventListener('change', function(event) {
+            var file = event.target.files[0];
+            var videoPlayer = document.getElementById('videoPlayer');
+            var videoSource = document.getElementById('videoSource');
+
+            if (file) {
+                var fileURL = URL.createObjectURL(file);
+                videoSource.src = fileURL;
+                videoPlayer.style.display = 'block';
+                videoPlayer.load();
+            }
+        });
+    </script>
+</body>
+</html>
